@@ -1,12 +1,12 @@
 import mongoose,{Schema,Document} from 'mongoose';
 
 interface userInterface extends Document{
-    name:string;
+    username:string;
     password:string;
 };
 
 const UserSchema=new Schema<userInterface>({
-    name:{
+    username:{
         type:String,
         maxLength:10,
         minLength:3,
@@ -16,7 +16,7 @@ const UserSchema=new Schema<userInterface>({
         type:String,
         required:[true,"password required"]
     }
-});
+},{timestamps:true});
 
 const UserModel=mongoose.model<userInterface>('user',UserSchema);
 
