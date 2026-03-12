@@ -16,7 +16,11 @@ const ContentSchema = new Schema<ContentInterface>(
     },
     type: {
       type: String,
-      required: [true, "type required"]
+      required: [true, "type required"],
+      enum:{// it is used to restrict a field to only specific allowed values.
+        values:["document","tweet","youtube","link"],
+        message:"type must be one of the following: {VALUE}"
+      }
     },
     title: {
       type: String,
