@@ -92,3 +92,13 @@ export const DeleteContent=async(req:AuthRequest,res:Response)=>{
 
     return res.status(200).json(new ApiResponse("content deleted successfully",200));
 };
+
+export const UserSignOut=async(req:AuthRequest,res:Response)=>{
+    try {
+        const userId=req.userId;
+        res.clearCookie("token",Options);
+        return res.status(200).json(new ApiResponse("user logout successfully",200));
+    } catch (error) {
+        throw new ApiError("error occurred at signout end point",400,"");
+    }
+};
