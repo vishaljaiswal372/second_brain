@@ -10,6 +10,7 @@ import { Types } from "mongoose";
 
 interface AuthRequest extends Request{
     userId?:Types.ObjectId;
+    contentId?:Types.ObjectId;
 };
 
 export const Options={
@@ -72,4 +73,22 @@ export const GetAllContent=async(req:AuthRequest,res:Response)=>{
     } catch (error) {
         throw new ApiError("Error occur during fetching content",400,"get All content end point",error);
     }
+};
+
+export const DeleteContent=async(req:AuthRequest,res:Response)=>{
+    const contentId=req.params.contentId;
+    if(!contentId){
+        throw new ApiError("content id is not given",400,"deleteContent end point line number 81");
+    }
+
+    const Content=await ContentModel.findOneAndDelete({
+        _id:contentId,
+        userId:req.userId
+    });
+
+    if(!Content){
+        throw new ApiError("content not found",403,"");
+    }
+
+    return res.status(200).json(new ApiResponse("content deleted successfully",200));
 };
