@@ -10,7 +10,8 @@ const UserSchema=new Schema<userInterface>({
         type:String,
         maxLength:10,
         minLength:3,
-        required:[true,"name required"]
+        required:[true,"name required"],
+        unique:true,
     },
     password:{
         type:String,
