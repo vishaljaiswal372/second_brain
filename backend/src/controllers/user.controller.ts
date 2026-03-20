@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 import UserModel from "../models/user.model.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import bcrypt from "bcrypt";
+import bcrypt, { hashSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 import ContentModel from "../models/content.model.js";
+import { hashing } from "../utils/HashingLink.js";
 
 import { Types } from "mongoose";
+import LinkModel from "../models/link.model.js";
 
 interface AuthRequest extends Request{
     userId?:Types.ObjectId;
@@ -101,4 +103,40 @@ export const UserSignOut=async(req:AuthRequest,res:Response)=>{
     } catch (error) {
         throw new ApiError("error occurred at signout end point",400,"");
     }
+};
+
+export const IsShare=async(req:AuthRequest,res:Response)=>{
+    const share=req.body.share;
+    const userId=req.userId;;
+    if(share){
+        let hash=hashing(20);
+        const existing=await LinkModel.findById(userId);
+        if(existing){
+            return res.status(200).json(new ApiResponse("link already present",200,existing.hash));
+        }
+        const newLink=await LinkModel.create({
+            hash,
+            userId
+        });
+        return res.status(200).json(new ApiResponse("shared link generated",200,newLink));
+    }
+    else{
+        const existing=await LinkModel.findById(userId);
+        if(existing){
+            await LinkModel.deleteOne({userId});
+            return res.status(200).json(new ApiResponse("shared attribute is false",200,existing));
+        }
+        return res.status(200).json(new ApiResponse("shared attribute is false",200));
+    }
+};
+
+export const UserContentLink=async(req:AuthRequest,res:Response)=>{
+    const hash=req.params.shareLink;
+    const HashExist=await LinkModel.findOne({hash});
+    if(!HashExist){
+        throw new ApiError("link is invalid or sharing is disabled",404,"UserContentLink endpoint line no. 137");
+    }
+    const UserId=HashExist.userId;
+    const content=await ContentModel.find({UserId});
+    return res.status(200).json(new ApiResponse("content of the user",200,content));
 };
