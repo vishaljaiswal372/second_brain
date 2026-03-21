@@ -1,10 +1,10 @@
-import './App.css'
+import { Button } from './componenets/ui/button'
 
 function App() {
  
   return (
     <>
-      
+      <Button variant='primary' text='Add' />
     </>
   )
 }
