@@ -9,15 +9,17 @@ export interface ButtonProps{
 };
 
 const variantStyle={
-    "primary":"hover:bg-blue-600 text-white font-medium",
-    "secondary":"hover:bg-gray-300 text-gray-800 font-medium",
+    "primary":"bg-[#5046e4] text-[#bfbbf4] font-medium flex items-center text-lg",
+    "secondary":"bg-[#d4daf9] text-[#8b86dd] font-medium flex items-center text-lg",
 };
 
-const defaultStyle="rounded-md flex items-center p-4 md";
+const defaultStyle="rounded-md flex items-center p-4 md m-3";
 
 export const Button=(props:ButtonProps)=>{
     return <button className={`${variantStyle[props.variant]} ${defaultStyle}}`}>
-        {props.startIcon}
+        <div className="pr-2">
+            {props.startIcon}
+        </div>
         {props.text}
     </button>
 };
