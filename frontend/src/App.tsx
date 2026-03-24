@@ -1,7 +1,7 @@
 import { Button } from './componenets/ui/button'
 import { AddIcon } from './assets/AddIcon'
 import { ShareIcon } from './assets/ShareIcon'
-import { Card } from './components/ui/Card'
+import { Card } from './componenets/ui/Card'
 import { DeleteIcon } from './assets/DeleteIcon'
 
 function App() {
