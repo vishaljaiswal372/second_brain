@@ -1,7 +1,10 @@
 import type { ReactElement } from "react";
 
+
+
+
 export interface ButtonProps{
-    onClick?: ()=> void;
+    SetContent:(openBox:Boolean)=>Boolean;
     text:string;
     endIcon?:ReactElement;
     startIcon?:ReactElement;
@@ -9,17 +12,19 @@ export interface ButtonProps{
 };
 
 const variantStyle={
-    "primary":"bg-[#5046e4] text-[#bfbbf4] font-medium flex items-center text-lg",
-    "secondary":"bg-[#d4daf9] text-[#8b86dd] font-medium flex items-center text-lg",
+    "primary":"bg-[#5046e4] text-[#bfbbf4] font-medium flex items-center text-md",
+    "secondary":"bg-[#d4daf9] text-[#8b86dd] font-medium flex items-center text-md",
 };
 
-const defaultStyle="rounded-md flex items-center p-4 md m-3";
+const defaultStyle="rounded-md flex items-center p-4 m-3";
 
 export const Button=(props:ButtonProps)=>{
-    return <button className={`${variantStyle[props.variant]} ${defaultStyle}}`}>
-        <div className="pr-2">
-            {props.startIcon}
-        </div>
+    return <button className={`${variantStyle[props.variant]} ${defaultStyle}}`} onClick={()=>(props.SetContent(true))}>
+        {props.startIcon ? (
+            <div className="pr-2 cursor-pointer">
+                {props.startIcon}
+            </div>
+        ):null}
         {props.text}
     </button>
 };
