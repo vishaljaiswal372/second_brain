@@ -10,7 +10,7 @@ interface LeftSideBarProps{
 
 export const LeftSideBar=(props:LeftSideBarProps)=>{
     return (
-        <div className="flex flex-col w-[25%] gap-2">
+        <div className="flex flex-col w-[23%] gap-2 border-2 h-screen mr-4">
             <div className="flex items-center p-2.5">
                 <div><BrainIcon/></div>
                 <div className="text-[#000000] text-3xl font-bold">Second Brain</div>
