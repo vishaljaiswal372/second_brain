@@ -3,7 +3,7 @@ import { Button } from "./button";
 
 interface AddContentProps{
     openBox:Boolean;
-    SetContent:(openBox:Boolean)=>Boolean;
+    onClose:()=>void;
 };
 
 export const AddContentBox=(props:AddContentProps)=>{
@@ -11,7 +11,7 @@ export const AddContentBox=(props:AddContentProps)=>{
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-80 w-85 bg-gray-100 border border-black rounded-lg flex flex-col items-center justify-center p-3 gap-3">
                 <div className="text-[#8c95c4] flex justify-center items-center m-2 gap-4 w-full">
                     <div className="text-[#2c3c89] font-bold text-xl underline decoration-solid">Add Content</div>
-                    <div className="text-black font-bold cursor-pointer" onClick={()=>(props.SetContent(false))}><CrossIcon/></div>
+                    <div className="text-black font-bold cursor-pointer" onClick={props.onClose}><CrossIcon/></div>
                 </div>
                 <div className="flex flex-col gap-3">
                     <InputBox placeholder="Heading"/>

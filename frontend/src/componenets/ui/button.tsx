@@ -4,7 +4,7 @@ import type { ReactElement } from "react";
 
 
 export interface ButtonProps{
-    SetContent:(openBox:Boolean)=>Boolean;
+    onClick?:()=>void;
     text:string;
     endIcon?:ReactElement;
     startIcon?:ReactElement;
@@ -19,7 +19,7 @@ const variantStyle={
 const defaultStyle="rounded-md flex items-center p-4 m-3";
 
 export const Button=(props:ButtonProps)=>{
-    return <button className={`${variantStyle[props.variant]} ${defaultStyle}}`} onClick={()=>(props.SetContent(true))}>
+    return <button className={`${variantStyle[props.variant]} ${defaultStyle}}`} onClick={props.onClick}>
         {props.startIcon ? (
             <div className="pr-2 cursor-pointer">
                 {props.startIcon}
