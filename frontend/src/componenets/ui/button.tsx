@@ -19,7 +19,7 @@ const variantStyle={
 const defaultStyle="rounded-md flex items-center p-4 m-3";
 
 export const Button=(props:ButtonProps)=>{
-    return <button className={`${variantStyle[props.variant]} ${defaultStyle}}`} onClick={props.onClick}>
+    return <button className={`${variantStyle[props.variant]} ${defaultStyle}} ${"cursor-pointer"}`} onClick={props.onClick}>
         {props.startIcon ? (
             <div className="pr-2 cursor-pointer">
                 {props.startIcon}

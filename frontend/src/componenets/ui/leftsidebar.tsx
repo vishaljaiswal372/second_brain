@@ -10,7 +10,7 @@ interface LeftSideBarProps{
 
 export const LeftSideBar=(props:LeftSideBarProps)=>{
     return (
-        <div className="flex flex-col w-[23%] gap-2 border-2 h-screen mr-4">
+        <div className="flex flex-col w-[23%] border-2 h-screen mr-4">
             <div className="flex items-center p-2.5">
                 <div><BrainIcon/></div>
                 <div className="text-[#000000] text-3xl font-bold">Second Brain</div>
@@ -19,7 +19,7 @@ export const LeftSideBar=(props:LeftSideBarProps)=>{
                 {props.arr?.map((item, index) => (
                     <div key={index} className="flex items-center gap-2">
                         <div>{item.Icon}</div>
-                        <div className="font-bold relative w-fit group cursor-pointer">
+                        <div className="font-bold text-lg relative w-fit group cursor-pointer">
                             <span>{item.text}</span>
                             <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#7a92c9] transition-all duration-300 group-hover:w-full"></span>
                         </div>
