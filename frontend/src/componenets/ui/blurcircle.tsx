@@ -9,7 +9,7 @@ interface BlurCircleProps {
 export const BlurCircle = (props: BlurCircleProps) => {
   return (
     <div
-      className="absolute -z-50 h-108 w-108 aspect-square rounded-full blur-3xl"
+      className="absolute z-0 h-110 w-120 aspect-square rounded-full blur-3xl"
       style={{
         top: props.top,
         left: props.left,
