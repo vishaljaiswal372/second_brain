@@ -25,7 +25,7 @@ function DashBoard() {
     <AddContentBox openBox={open} onClose={()=>{SetContentBox(false)}}/>
     <div className='flex'>
       <LeftSideBar arr={LeftSideBarContent}/>
-      <div className='flex flex-col w-full pt-6 gap-3'>
+    <div className='flex flex-col w-full gap-3 bg-slate-100 p-4'>
       <div className='flex items-center justify-between'>
         <div className='text-3xl font-bold'>All Notes</div>
         <div className='flex gap-3 p-2'>
@@ -34,9 +34,9 @@ function DashBoard() {
         </div>
       </div>
       <div className='flex gap-3'>
-        <Card heading='Twitter tweet' Type='twitter' leftIcon={<AddIcon/>} RightFirstIcon={<ShareIcon/>} RightSecondIcon={<DeleteIcon/>} tag={["productivity","notes"]}/>
+        <Card heading='Twitter tweet' Type='twitter' leftIcon={<AddIcon/>} RightFirstIcon={<ShareIcon/>} RightSecondIcon={<DeleteIcon/>} tag={["productivity","notes"]} link="https://x.com/elonmusk/status/1844467059083596120" timestamp="2024-01-01"/>
       </div>
-      </div>
+    </div>
     </div>
   </>
   )

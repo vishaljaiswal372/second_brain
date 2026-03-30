@@ -6,7 +6,7 @@ import bcrypt, { hashSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 import ContentModel from "../models/content.model.js";
 import { hashing } from "../utils/HashingLink.js";
-
+import TagModel from "../models/tag.model.js";
 import { Types } from "mongoose";
 import LinkModel from "../models/link.model.js";
 
@@ -57,13 +57,22 @@ export const UserSignIn=async(req:Request,res:Response)=>{
 
 export const AddContent=async(req:AuthRequest,res:Response)=>{
     const {type,link,title,tags}=req.body;
+
+    const newTags=[];
+
+    for(let it of tags){
+        const tag=await TagModel.create({title:it});
+        newTags.push(tag._id);
+    };
+    
     const content=await ContentModel.create({
         link,
         title,
         type,
-        tags,
+        tags: newTags,
         userId:req.userId,
     });
+
     return res.status(201).json(new ApiResponse("Content added successfully",201,content));
 };
 
@@ -71,6 +80,7 @@ export const GetAllContent=async(req:AuthRequest,res:Response)=>{
     try {
         const userId=req.userId;
         const content=await ContentModel.findById(userId);
+        console.log(content);
         return res.status(200).json(new ApiResponse("all Content fetched successfully",200,content));
     } catch (error) {
         throw new ApiError("Error occur during fetching content",400,"get All content end point",error);

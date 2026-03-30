@@ -4,7 +4,7 @@ interface ContentInterface extends Document {
   link: string;
   type: string;
   title: string;
-  tags: string[];
+  tags: Types.ObjectId[];
   userId: Types.ObjectId;
 }
 
@@ -30,7 +30,7 @@ const ContentSchema = new Schema<ContentInterface>(
       {
         type: Schema.Types.ObjectId,
         ref: "tag",
-        required: [true, "tags required"]
+        default: []
       }
     ],
     userId: {

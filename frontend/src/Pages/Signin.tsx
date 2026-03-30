@@ -3,21 +3,24 @@ import { InputBox } from "../componenets/ui/InputBox";
 import { BlurCircle } from "../componenets/ui/blurcircle";
 import axios from "axios";
 import { BackendUrl } from "../Config";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SignIn=()=>{
 
-    const usernameRef=useRef<any>();
-    const passwordRef=useRef<any>();
+    const usernameRef=useRef<any>(null);
+    const passwordRef=useRef<any>(null);
+    const navigate=useNavigate();
 
     async function  signin(){
         const username=usernameRef.current?.value;
         const password=passwordRef.current?.value;
-        const res=await axios.post(`${BackendUrl}`,{
+        const res=await axios.post(`${BackendUrl}/user/sign-in`,{
             username,
             password
         });
         localStorage.setItem("token",res.data.token);
-        alert(`${username} is signin`);
+        navigate("/dashboard");
     };
 
     return (
@@ -28,11 +31,11 @@ export const SignIn=()=>{
         <div className="flex flex-col justify-center items-center z-10 gap-3 h-70 bg-white w-100 rounded-lg border-2">
             <div className="text-xl font-bold">SignIn</div>
             <div className="flex flex-col gap-4 cursor-pointer">
-                <InputBox Reference={usernameRef} placeholder="username"/>
-                <InputBox Reference={passwordRef} placeholder="password"/>
+                <InputBox  Reference={usernameRef} placeholder="username"/>
+                <InputBox  Reference={passwordRef} placeholder="password"/>
             </div>
             <div>
-                <Button variant="primary" text="Submit"/>
+                <Button variant="primary" text="Submit" onClick={signin}/>
             </div>
         </div>
     </div>

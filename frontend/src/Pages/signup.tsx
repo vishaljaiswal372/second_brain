@@ -4,20 +4,23 @@ import { Button } from "../componenets/ui/button";
 import { InputBox } from "../componenets/ui/InputBox";
 import axios from "axios";
 import { BackendUrl } from "../Config";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp=()=>{
 
-    const usernameRef=useRef<any>();
-    const passwordRef=useRef<any>();
+    const usernameRef=useRef<any>(null);
+    const passwordRef=useRef<any>(null);
+    const navigate=useNavigate();
 
     async function  signup(){
         const username=usernameRef.current?.value;
         const password=passwordRef.current?.value;
-        await axios.post(`${BackendUrl}`,{
+        await axios.post(`${BackendUrl}/user/signup`,{
             username,
             password
         });
         alert(`${username} is Sign-Up`);
+        navigate("/signin");
     };
 
 
@@ -31,11 +34,11 @@ export const SignUp=()=>{
         <div className="flex flex-col z-10 justify-center items-center gap-3 h-70 bg-white w-100 rounded-lg border-2">
             <div className="text-xl font-bold">SignUp</div>
             <div className="flex flex-col gap-4 cursor-pointer">
-                <InputBox Reference={usernameRef} placeholder="username"/>
-                <InputBox Reference={passwordRef} placeholder="password"/>
+                <InputBox  Reference={usernameRef} placeholder="username"/>
+                <InputBox  Reference={passwordRef} placeholder="password"/>
             </div>
             <div>
-                <Button variant="primary" text="Submit"/>
+                <Button variant="primary" text="Submit"onClick={signup}/>
             </div>
         </div>
     </div>

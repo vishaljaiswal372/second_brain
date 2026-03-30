@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 
 interface CardProps {
   heading: string;
@@ -13,7 +14,7 @@ interface CardProps {
 
 export const Card = (props: CardProps) => {
   return (
-    <div className="max-w-82 flex-row items-center justify-center gap-5 border-slate-300 border-2 rounded-lg p-3 shadow-md hover:border-[#281fd4] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-[#8b86dd]/50 hover:-translate-y-1">
+    <div className="max-w-82 flex-row items-center justify-center gap-5 bg-white border-slate-300 border-2 rounded-lg p-3 shadow-md hover:border-[#281fd4] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-[#8b86dd]/50 hover:-translate-y-1">
       <div className="flex justify-between items-center">
         <div className="flex gap-3 items-center justify-center">
           <div className="text-[#8b86dd] cursor-pointer hover:text-[#281fd4]">{props.leftIcon}</div>
@@ -36,13 +37,8 @@ export const Card = (props: CardProps) => {
           </div>
         ) : null}
         {props.Type === "twitter" ? (
-          <div className="w-full flex items-center justify-center">
-            <iframe
-              className="rounded-lg"
-              src="https://www.youtube.com/embed/BLAH?showinfo=0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            ></iframe> 
+          <div className="w-full h-fit flex items-center justify-center">
+            <TwitterTweetEmbed tweetId="2038646944537395450" />
           </div>
         ) : null}
       </div>
