@@ -8,9 +8,22 @@ import { useState } from 'react'
 import { LeftSideBar } from '../componenets/ui/leftsidebar'
 import { TweetIcon } from '../assets/TweetIcon'
 import { YoutubeIcon } from '../assets/YoutubeIcon'
+import { useContent } from '../hooks/useContent'
+
+export const formatDate = (timestamp: string) => {
+  const date = new Date(timestamp);
+
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+};
 
 function DashBoard() {
   const [open,SetContentBox]=useState(false);
+
+  const content=useContent();
 
   const LeftSideBarContent=[{
     Icon:<TweetIcon/>,
@@ -34,7 +47,20 @@ function DashBoard() {
         </div>
       </div>
       <div className='flex gap-3'>
-        <Card heading='Twitter tweet' Type='twitter' leftIcon={<AddIcon/>} RightFirstIcon={<ShareIcon/>} RightSecondIcon={<DeleteIcon/>} tag={["productivity","notes"]} link="https://x.com/elonmusk/status/1844467059083596120" timestamp="2024-01-01"/>
+        {/* <Card heading='Twitter tweet' Type='twitter' leftIcon={<AddIcon/>} RightFirstIcon={<ShareIcon/>} RightSecondIcon={<DeleteIcon/>} tag={["productivity","notes"]} link="https://x.com/elonmusk/status/1844467059083596120" timestamp="2024-01-01"/> */}
+        {content.map((item: any) => (
+          <Card
+            key={item._id}
+            heading={item.title}
+            Type={item.type}
+            leftIcon={<AddIcon />}
+            RightFirstIcon={<ShareIcon />}
+            RightSecondIcon={<DeleteIcon />}
+            //tag={item.tag}
+            link={item.link}
+            timestamp={formatDate(item.createdAt)}
+          />
+        ))}
       </div>
     </div>
     </div>

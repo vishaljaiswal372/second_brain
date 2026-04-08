@@ -38,7 +38,7 @@ export const SignUp=()=>{
                 <InputBox  Reference={passwordRef} placeholder="password"/>
             </div>
             <div>
-                <Button variant="primary" text="Submit"onClick={signup}/>
+                <Button variant="primary" text="Submit" onClick={signup}/>
             </div>
         </div>
     </div>

@@ -1,1 +1,2 @@
-export const BackendUrl="http://localhost:5000/api/v1";
+// Use Vite dev-server proxy to avoid browser CORS issues in development.
+export const BackendUrl="/api/v1";

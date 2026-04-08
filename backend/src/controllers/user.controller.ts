@@ -15,11 +15,12 @@ interface AuthRequest extends Request{
     contentId?:Types.ObjectId;
 };
 
-export const Options={
-    httpOnly:true,
-    secure:true,
-    expiresIn:new Date(Date.now()+7*24*60*60*1000) // 7 days
-}
+export const Options = {
+    httpOnly: true,
+    secure: false,              // localhost
+    sameSite: "lax",            // ✅ FIXED
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // ✅ FIXED
+};
 
 export const UserSignUp=async(req:Request,res:Response)=>{
     const {username,password}=req.body;
@@ -79,7 +80,7 @@ export const AddContent=async(req:AuthRequest,res:Response)=>{
 export const GetAllContent=async(req:AuthRequest,res:Response)=>{
     try {
         const userId=req.userId;
-        const content=await ContentModel.findById(userId);
+        const content=await ContentModel.find({userId});
         console.log(content);
         return res.status(200).json(new ApiResponse("all Content fetched successfully",200,content));
     } catch (error) {

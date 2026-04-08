@@ -7,10 +7,11 @@ interface CardProps {
   RightFirstIcon?: ReactElement;
   RightSecondIcon?: ReactElement;
   Type: "youtube" | "twitter";
-  link?: string;
+  link: any;
   tag?: string[];
   timestamp?:string;
 }
+
 
 export const Card = (props: CardProps) => {
   return (
@@ -18,19 +19,25 @@ export const Card = (props: CardProps) => {
       <div className="flex justify-between items-center">
         <div className="flex gap-3 items-center justify-center">
           <div className="text-[#8b86dd] cursor-pointer hover:text-[#281fd4]">{props.leftIcon}</div>
-          <div className="text-md font-semibold">{props.heading}</div>
+          <div className="text-lg font-bold">{props.heading}</div>
         </div>
         <div className="flex gap-3 items-center justify-center">
           <div className="text-[#8b86dd] text-lg cursor-pointer hover:text-[#281fd4]">{props.RightFirstIcon}</div>
           <div className="text-[#8b86dd] text-lg cursor-pointer hover:text-[#281fd4]">{props.RightSecondIcon}</div>
         </div>
       </div>
-      <div className="rounded-md m-5">
+      <div className="rounded-md py-4 flex justify-center items-center">
         {props.Type === "youtube" ? (
           <div className="w-full">
             <iframe
               className="rounded-lg flex items-center justify-center"
-              src="https://www.youtube.com/embed/BLAH?showinfo=0"
+              src={
+                props.link?.includes("youtu.be")
+                  ? `https://www.youtube.com/embed/${props.link.split("/")[3]?.split("?")[0]}`
+                  : props.link?.includes("youtube.com/watch")
+                  ? `https://www.youtube.com/embed/${props.link.split("v=")[1]?.split("&")[0]}`
+                  : props.link
+              }
               allow="autoplay; encrypted-media"
               allowFullScreen
             ></iframe>
@@ -38,7 +45,8 @@ export const Card = (props: CardProps) => {
         ) : null}
         {props.Type === "twitter" ? (
           <div className="w-full h-fit flex items-center justify-center">
-            <TwitterTweetEmbed tweetId="2038646944537395450" />
+            <TwitterTweetEmbed tweetId={props.link.split("/status/")[1]?.split("?")[0]} 
+            />
           </div>
         ) : null}
       </div>

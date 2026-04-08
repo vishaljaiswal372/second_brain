@@ -18,8 +18,8 @@ export const SignIn=()=>{
         const res=await axios.post(`${BackendUrl}/user/sign-in`,{
             username,
             password
-        });
-        localStorage.setItem("token",res.data.token);
+        },{withCredentials:true});
+        console.log(res.data.token);
         navigate("/dashboard");
     };
 

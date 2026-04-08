@@ -3,13 +3,14 @@ import { Request, Response, NextFunction } from 'express';
 import ApiError from '../utils/ApiError.js';
 import UserModel from '../models/user.model.js';
 import { Types } from 'mongoose';
+import { JwtPayload } from 'jsonwebtoken';
 
 interface AuthRequest extends Request{
     userId?: Types.ObjectId;
 }
 
 export const authMiddleware=async(req:AuthRequest,res:Response,next:NextFunction)=>{
-    const token=req.cookies.token;
+    const token=req.cookies.token || req.headers.authorization?.split(" ")[1];
     if(!token){
         throw new ApiError("Unauthorized: No token provided",401,"authMiddleware line no. 9 ");
     }
