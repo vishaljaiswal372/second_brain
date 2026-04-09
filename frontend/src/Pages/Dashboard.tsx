@@ -46,7 +46,7 @@ function DashBoard() {
           <Button variant='primary' text='Add Content' startIcon={<AddIcon />} onClick={()=>{SetContentBox(true)}}/>
         </div>
       </div>
-      <div className='flex gap-3'>
+      <div className='flex gap-5 flex-wrap' >
         {/* <Card heading='Twitter tweet' Type='twitter' leftIcon={<AddIcon/>} RightFirstIcon={<ShareIcon/>} RightSecondIcon={<DeleteIcon/>} tag={["productivity","notes"]} link="https://x.com/elonmusk/status/1844467059083596120" timestamp="2024-01-01"/> */}
         {content.map((item: any) => (
           <Card
@@ -56,9 +56,10 @@ function DashBoard() {
             leftIcon={<AddIcon />}
             RightFirstIcon={<ShareIcon />}
             RightSecondIcon={<DeleteIcon />}
-            //tag={item.tag}
+            tags={item.tag}
             link={item.link}
             timestamp={formatDate(item.createdAt)}
+            contentId={item._id}
           />
         ))}
       </div>
