@@ -15,6 +15,8 @@ interface CardProps {
   contentId:string;
 }
 
+// const data=useContext(LeftSideBarContext);
+
 
 export const Card = (props: CardProps) => {
   return (

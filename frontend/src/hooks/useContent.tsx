@@ -21,7 +21,7 @@ export const useContent=()=>{
         
         const IntervalId=setInterval(()=>{
             refreshContent();
-        },100);
+        },10000);
 
         return () => clearInterval(IntervalId);
     },[]);

@@ -9,6 +9,9 @@ import { LeftSideBar } from '../componenets/ui/leftsidebar'
 import { TweetIcon } from '../assets/TweetIcon'
 import { YoutubeIcon } from '../assets/YoutubeIcon'
 import { useContent } from '../hooks/useContent'
+import axios from 'axios'
+import { BackendUrl } from '../Config';
+import AllContentIcon from '../assets/AllContentIcon'
 
 export const formatDate = (timestamp: string) => {
   const date = new Date(timestamp);
@@ -16,8 +19,9 @@ export const formatDate = (timestamp: string) => {
   const day = date.getDate().toString().padStart(2, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
+  const time=date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  return `${day}/${month}/${year}`;
+  return `${day}/${month}/${year} at ${time}`;
 };
 
 function DashBoard() {
@@ -26,12 +30,26 @@ function DashBoard() {
   const content=useContent();
 
   const LeftSideBarContent=[{
+    Icon:<AllContentIcon/>,
+    text:"All Content"
+  },{
     Icon:<TweetIcon/>,
     text:"Tweets"
   },{
     Icon:<YoutubeIcon/>,
-    text:"Videos"
+    text:"Youtube"
   }]
+
+  function ShareLink() {
+    axios.post(`${BackendUrl}/user/brain/share`,{
+    share:true
+    },{withCredentials:true}).then((res)=>{
+      const link=res.data.data.hash;
+      const shareLink=`http://localhost:5173/brain/share/${link}`;
+      navigator.clipboard.writeText(shareLink);
+      alert("link copied to clipboard!");
+    });
+};
 
   return (
   <>
@@ -42,7 +60,7 @@ function DashBoard() {
       <div className='flex items-center justify-between'>
         <div className='text-3xl font-bold'>All Notes</div>
         <div className='flex gap-3 p-2'>
-          <Button variant='secondary' text='Share Brain' startIcon={<ShareIcon />} />
+          <Button variant='secondary' text='Share Brain' startIcon={<ShareIcon />} onClick={ShareLink} />
           <Button variant='primary' text='Add Content' startIcon={<AddIcon />} onClick={()=>{SetContentBox(true)}}/>
         </div>
       </div>
