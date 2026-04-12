@@ -27,7 +27,7 @@ export const formatDate = (timestamp: string) => {
 function DashBoard() {
   const [open,SetContentBox]=useState(false);
 
-  const [selected,setSelected]=useState<"All content" | "Youtube" | "Tweets">("All content");
+  const [selected,setSelected]=useState<"All Content" | "Youtube" | "Tweets">("All Content");
 
   const content=useContent();
 

@@ -13,14 +13,14 @@ interface CardProps {
   tags?: string[];
   timestamp?:string;
   contentId:string;
-  selectedContent:"All content" | "Youtube" | "Tweets";
+  selectedContent:"All Content" | "Youtube" | "Tweets";
 }
 
 // const data=useContext(LeftSideBarContext);
 
 
 export const Card = (props: CardProps) => {
-  return ( ( (props.selectedContent === "All content" && props.Type==="youtube") || (props.selectedContent === "All content" && props.Type==="twitter") ) || (props.selectedContent==="Youtube" && props.Type==="youtube") || (props.selectedContent==="Tweets" && props.Type==="twitter")  ?
+  return ( ( (props.selectedContent === "All Content" && props.Type==="youtube") || (props.selectedContent === "All Content" && props.Type==="twitter") ) || (props.selectedContent==="Youtube" && props.Type==="youtube") || (props.selectedContent==="Tweets" && props.Type==="twitter")  ?
   <div className="max-w-82 h-fit flex-row items-center justify-center gap-5 bg-white border-slate-300 border-2 rounded-lg p-3 shadow-md hover:border-[#281fd4] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-[#8b86dd]/50 hover:-translate-y-1">
       <div className="flex justify-between items-center">
         <div className="flex gap-3 items-center justify-center">

@@ -6,7 +6,7 @@ interface LeftSideBarProps{
         Icon:ReactElement;
         text:string;
     }[];
-    setSelectedContent:(content:"All content" | "Youtube" | "Tweets")=>void;
+    setSelectedContent:(content:"All Content" | "Youtube" | "Tweets")=>void;
 }
 
 export const LeftSideBar=(props:LeftSideBarProps)=>{
@@ -20,7 +20,7 @@ export const LeftSideBar=(props:LeftSideBarProps)=>{
             </div>
             <div className="flex flex-col justify-center p-2.5 ml-7 cursor-pointer">
                 {props.arr?.map((item, index) => (
-                    <div key={index} className="flex items-center gap-2" onClick={()=>{props.setSelectedContent(item.text as "All content" | "Youtube" | "Tweets")}}>
+                    <div key={index} className="flex items-center gap-2" onClick={()=>{props.setSelectedContent(item.text as "All Content" | "Youtube" | "Tweets")}}>
                         <div>{item.Icon}</div>
                         <div className="font-bold text-lg relative w-fit group cursor-pointer">
                             <span>{item.text}</span>
