@@ -1,4 +1,4 @@
-import { useState, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { BrainIcon } from "../../assets/BrainIcon";
 
 interface LeftSideBarProps{
@@ -6,11 +6,11 @@ interface LeftSideBarProps{
         Icon:ReactElement;
         text:string;
     }[];
+    setSelectedContent:(content:"All content" | "Youtube" | "Tweets")=>void;
 }
 
 export const LeftSideBar=(props:LeftSideBarProps)=>{
 
-    const [selected,setSelected]=useState<"All content" | "Youtube" | "Tweets">("All content");
 
     return (
         <div className="flex flex-col w-[23%]  h-screen mr-4">
@@ -20,7 +20,7 @@ export const LeftSideBar=(props:LeftSideBarProps)=>{
             </div>
             <div className="flex flex-col justify-center p-2.5 ml-7 cursor-pointer">
                 {props.arr?.map((item, index) => (
-                    <div key={index} className="flex items-center gap-2" onClick={()=>{setSelected(item.text as "All content" | "Youtube" | "Tweets")}}>
+                    <div key={index} className="flex items-center gap-2" onClick={()=>{props.setSelectedContent(item.text as "All content" | "Youtube" | "Tweets")}}>
                         <div>{item.Icon}</div>
                         <div className="font-bold text-lg relative w-fit group cursor-pointer">
                             <span>{item.text}</span>

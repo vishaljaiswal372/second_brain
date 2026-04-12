@@ -27,6 +27,8 @@ export const formatDate = (timestamp: string) => {
 function DashBoard() {
   const [open,SetContentBox]=useState(false);
 
+  const [selected,setSelected]=useState<"All content" | "Youtube" | "Tweets">("All content");
+
   const content=useContent();
 
   const LeftSideBarContent=[{
@@ -55,7 +57,7 @@ function DashBoard() {
   <>
     <AddContentBox openBox={open} onClose={()=>{SetContentBox(false)}}/>
     <div className='flex'>
-      <LeftSideBar arr={LeftSideBarContent}/>
+      <LeftSideBar  arr={LeftSideBarContent} setSelectedContent={setSelected}/>
     <div className='flex flex-col w-full gap-3 bg-slate-100 p-4'>
       <div className='flex items-center justify-between'>
         <div className='text-3xl font-bold'>All Notes</div>
@@ -68,6 +70,7 @@ function DashBoard() {
         {/* <Card heading='Twitter tweet' Type='twitter' leftIcon={<AddIcon/>} RightFirstIcon={<ShareIcon/>} RightSecondIcon={<DeleteIcon/>} tag={["productivity","notes"]} link="https://x.com/elonmusk/status/1844467059083596120" timestamp="2024-01-01"/> */}
         {content.map((item: any) => (
           <Card
+            selectedContent={selected}
             key={item._id}
             heading={item.title}
             Type={item.type}
