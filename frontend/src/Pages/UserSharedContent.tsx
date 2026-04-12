@@ -6,7 +6,20 @@ import { ShareIcon } from '../assets/ShareIcon'
 import { DeleteIcon } from '../assets/DeleteIcon'
 import {formatDate} from './Dashboard'
 import { useState } from 'react'
-import { LeftSideBarContent } from './Dashboard'
+import AllContentIcon from '../assets/AllContentIcon'
+import { TweetIcon } from '../assets/TweetIcon'
+import { YoutubeIcon } from '../assets/YoutubeIcon'
+
+const LeftSideBarContent=[{
+    Icon:<AllContentIcon/>,
+    text:"All Content"
+  },{
+    Icon:<TweetIcon/>,
+    text:"Tweets"
+  },{
+    Icon:<YoutubeIcon/>,
+    text:"Youtube"
+  }]
 
 export const UserSharedContent=()=>{
     const content=useContent();

@@ -12,6 +12,7 @@ import { useContent } from '../hooks/useContent'
 import axios from 'axios'
 import { BackendUrl } from '../Config';
 import AllContentIcon from '../assets/AllContentIcon'
+import { LogoutIcon } from '../assets/LogoutIcon'
 
 export const formatDate = (timestamp: string) => {
   const date = new Date(timestamp);
@@ -24,7 +25,7 @@ export const formatDate = (timestamp: string) => {
   return `${day}/${month}/${year} at ${time}`;
 };
 
-export const LeftSideBarContent=[{
+const LeftSideBarContent=[{
     Icon:<AllContentIcon/>,
     text:"All Content"
   },{
@@ -64,6 +65,15 @@ function DashBoard() {
         <div className='flex gap-3 p-2'>
           <Button variant='secondary' text='Share Brain' startIcon={<ShareIcon />} onClick={ShareLink} />
           <Button variant='primary' text='Add Content' startIcon={<AddIcon />} onClick={()=>{SetContentBox(true)}}/>
+          <div className='cursor-pointer flex' onClick={()=>{
+            axios.post(`${BackendUrl}/user/sign-out`,{withCredentials:true}).then(()=>{
+              setTimeout(()=>{
+                window.location.href="/signin";
+              },10000);
+            });
+          }}>
+            <LogoutIcon />
+          </div>
         </div>
       </div>
       <div className='flex gap-5 flex-wrap' >
