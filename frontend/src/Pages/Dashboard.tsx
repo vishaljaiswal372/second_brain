@@ -24,14 +24,7 @@ export const formatDate = (timestamp: string) => {
   return `${day}/${month}/${year} at ${time}`;
 };
 
-function DashBoard() {
-  const [open,SetContentBox]=useState(false);
-
-  const [selected,setSelected]=useState<"All Content" | "Youtube" | "Tweets">("All Content");
-
-  const content=useContent();
-
-  const LeftSideBarContent=[{
+export const LeftSideBarContent=[{
     Icon:<AllContentIcon/>,
     text:"All Content"
   },{
@@ -41,6 +34,13 @@ function DashBoard() {
     Icon:<YoutubeIcon/>,
     text:"Youtube"
   }]
+
+function DashBoard() {
+  const [open,SetContentBox]=useState(false);
+
+  const [selected,setSelected]=useState<"All Content" | "Youtube" | "Tweets">("All Content");
+
+  const content=useContent();
 
   function ShareLink() {
     axios.post(`${BackendUrl}/user/brain/share`,{
